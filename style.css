@@ -1,0 +1,632 @@
+
+/************* Custom Propierties *************/
+:root{
+  --primer-color:#3855A0;
+  --primer-color-alpha: rgba(56, 85, 160, 0.75);
+  --segundo-color: #14192D;
+  --segundo-color-alfa: rgba(20, 25, 45, 0.75);
+  --tercer-color: #092C60;
+  --tercer-color-alfa: rgba(9, 44, 96, 0.75);
+  --color-blanco: #fff;
+  --color-gris: #F3F3F3;
+  --color-gris-claro: #CCCCCC;
+  --color-gris-fuerte: #666666;
+  --color-negro: #000000;
+  --color-link: #509EE3;
+  --color-titulo: #333333;
+  --color-texto: #222222;
+  --color-blanco-alfa: rgba(255, 255, 255, 0.5);
+  --color-negro-alfa: rgba(0, 0, 0, 0.5);
+  --fuente:"Raleway", sans-serif;
+  --max-wdith: 1200px;
+  --header-height: 4rem;
+}
+
+/************* Reset *************/
+html{/*Hace que el tamaño de la caja empiece desde el borde y no desde el contenido como es por defecto*/
+  box-sizing: border-box;
+  font-family: var(--fuente);
+  font-size: 16px;
+  scroll-behavior: smooth;/*Para que cuando le de clic en inicio, portafolio o contacto baje suavemente hacia donde está*/
+}
+
+*,
+*::after,
+*::before {/*Todos los elementos que su contenido generado dinamicamente con after y before, que hereden el tamaño de caja de la etiqueta html */
+box-sizing: inherit;
+}
+
+body{
+margin: 0;
+overflow-x: hidden;/*quita la barra de desplazamiento horizontal q molesta*/
+color: var(--color-texto);
+}
+
+a{
+color: var(--color-link);
+transition: all 0.5s ease-out;
+}
+
+a:hover{
+opacity: 0.75;
+}
+
+h1{
+margin: 0;
+font-size: 2rem;
+}
+
+h2{
+margin: 0;
+font-size: 1.5rem;
+}
+
+h3{
+margin: 0;
+font-size: 1.25rem;
+}
+
+h4{
+margin: 0;
+font-size: 1rem;
+}
+
+h5{
+margin: 0;
+font-size: 0.85rem;
+}
+
+h6{
+margin: 0;
+font-size: 0.7rem;
+}
+
+img{/*hace las imagenes responsive*/
+max-width: 100%;
+height: auto;
+}
+
+p{
+line-height: 1.6;
+}
+
+/************* Components *************/
+
+/****Contact formulario ****/
+
+.contact-form{
+  margin: 2rem auto;
+  padding: 1rem;
+  max-width: 800px;
+}
+
+.contact-form >*{
+  padding: .5rem;
+  margin: 1rem auto;
+  display: block;
+  width: 100%;
+}
+
+.contact-form input,
+.contact-form textarea{
+  font-size: .85rem;
+  font-family: var(--fuente);
+}
+
+.contact-form input{/*hace que solo quede la raya de abajo y no todo el cuadrado*/
+  border: 0;
+  border-bottom: thin solid var(--color-gris-fuerte);
+  padding-left: 0;/*hace que la letra se junte*/
+}
+
+.contact-form textarea{
+  border: thin solid var(--color-gris-fuerte);
+  resize: none;/*le quita el triangulo que le permite modificar el ancho*/
+}
+
+.contact-form input[type="submit"]{
+  margin-top: 0;
+  cursor: pointer;
+  transition: all .5s ease-out;
+}
+
+.contact-form input[type="submit"]:hover{
+  opacity: .85;
+}
+
+.contact-form *::placeholder{
+  color: var(--color-gris-fuerte);
+}
+
+.contact-form-respuesta{
+  padding: 1rem;
+  width: 400px;
+  text-align: center;
+  background-color: var(--color-blanco);
+}
+
+.contact-form-respuesta svg{
+  margin-top: 2rem;
+  width: 4rem;
+  height: 4rem;
+  fill: var(--primer-color);
+}
+
+.modal#gracias:target{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media screen and (min-width:1024px){
+  .contact-form{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    column-gap: 1rem;/*espacio entre columnas*/
+  }
+
+  .contact-form input,
+  .contact-form textarea{
+  font-size: 1rem;
+  }
+
+  .contact-form textarea,
+  .contact-form-loader{
+    grid-column: span 2;/*ocupa 2 espacios*/
+  }
+
+  .contact-form input[type="submit"]{
+    margin-left: 0;/*para que se vaya a la pared*/
+  }
+}
+
+/**** Fondo imagen ****/
+
+.fondo-imagen{
+background-image: var(--fondo-image);
+background-repeat: no-repeat;
+background-size: cover;/*la imagen se adapta al contenedor*/
+background-position: center;
+background-attachment: var(--fondo-attachment);/*no se scrollea como tiene por defecto sino que se queda fijo*/
+}
+
+.fondo-imagen-opacidad{
+width: 100%;/*tamaño de la pantalla*/
+min-height: 100vh;/*hace que la imagen se ajuste en y*/
+display: flex;/*sino es flexible lo que esta abajo no se haria*/
+justify-content: center;/*centra de x*/
+align-items: center;/*centra de y*/
+text-align: center;
+background-color: var(--fondo-color-opacidad);
+}
+
+.fondo-imagen-titulo1{
+font-size: 5vw;/*la letra se adapta cuando se hace mas pequeña*/
+color: var(--fondo-color-texto);
+}
+
+.fondo-imagen-titulo2{
+font-size: 2.5vw;/*la letra se adapta cuando se hace mas pequeña*/
+color: var(--fondo-color-texto);
+}
+
+/****Menu****/
+
+.menu-btn{
+outline: thin solid var(--primer-color);/*reseta el outline, ahora será delgado de linea solida y tendra el color asignado*/
+border: 0;/*le quita el borde feo que sale*/
+cursor: pointer;/*le pone una mano cuando pasa encima de ella*/
+background-color: var(--segundo-color);
+}
+
+.menu-btn svg{
+fill: var(--primer-color);/*le da color a las lineas que estan dentro del svg*/
+}
+
+.menu{
+position: fixed;
+left: 0;
+bottom: var(--header-height);
+width: 100%;
+display: flex;
+flex-direction: column;/*los pone en columna*/
+background-color: var(--segundo-color);
+opacity: 0;
+pointer-events: none;/*desactiva el menu*/
+transition: opacity 0.5s ease;
+}
+
+.menu.activar{
+opacity: 1;
+pointer-events: auto;/*activa el menu*/
+}
+
+.menu a{
+padding: 1rem;
+font-size: 1.5rem;
+font-weight: bold;
+text-align: center;
+text-decoration: none;
+color: var(--primer-color);
+}
+
+.menu a:last-child{/*alinea el contacto este igual que el logo*/
+padding-right: 0;
+}
+
+.menu a:hover{
+color: var(--color-blanco);
+background-color: var(--primer-color);
+}
+
+@media screen and (min-width: 1024px){
+.menu-btn{
+  display: none;/*quita el menu*/
+}
+
+.menu{/*el menu lo hace para desktop*/
+  position: static;
+  width: auto;
+  flex-direction: row;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.menu a{
+  padding: 0 1rem;
+}
+
+.menu a:hover{
+  background-color: transparent;
+}
+}
+/**** modal ***/
+
+.modal{
+  position: fixed;
+  z-index: 999;
+  top: 0;/*lo pone estirarlo y ocupa todo*/
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-negro-alfa);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 1s;
+}
+
+.modal-content{
+  position: relative;
+}
+
+.modal-close{
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.modal-close svg{
+  width: 3rem;
+  height: 3rem;
+  fill: var(--primer-color);
+}
+
+.modal[id|="trabajo"]:target{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/*****Progress******/
+
+progress{
+width: 100%;
+height: 1rem;
+background-color: var(--color-gris);
+}
+
+progress::-webkit-progress-bar{
+background-color: var(--color-gris);
+}
+
+progress::-webkit-progress-value{
+background-color: var(--color-gris-fuerte);
+}
+
+progress::-moz-progress-bar{/*para que salga en firefox*/
+background-color: var(--color-gris-fuerte);
+}
+
+.progress{
+margin: 1rem auto;
+}
+
+.progress > p{
+margin: 0;
+display: flex;
+justify-content: space-between;/*separo las palabras de extremo a extremo*/
+font-size: 0.85rem;
+}
+
+/************* Utilities *************/
+.bg-gris-claro{
+background-color: var(--color-gris-claro);
+}
+
+.full-lg-screen{/*pantalla completa*/
+width: 100%;
+min-height: 100vh;
+}
+
+.box-shadow-1{
+box-shadow: 0.25rem 0.25rem 1rem rgba(0, 0, 0, 0.25);
+}
+
+.btn{
+border-radius: .5rem;
+padding: 1rem;
+display: inline-block;
+width: 200px;
+font-weight: bold;
+text-align: center;
+text-decoration: none;
+background-color: var(--primer-color);
+color: var(--color-blanco);
+}
+
+.container{
+margin-left: auto;
+margin-right: auto;
+max-width: var(--max-wdith);
+}
+
+/* .scala-gris{
+filter: grayscale(1);
+}*/
+
+.none{
+display: none;
+}
+
+.section{
+padding: 2rem 1rem;
+}
+
+.section-titulo{
+border-top: thin solid var(--primer-color);
+border-bottom: thin solid var(--primer-color);
+margin: 2rem auto;
+padding: .5rem 1rem;
+width: 250px;
+text-align: center;
+color: var(--color-titulo);
+}
+
+.text-center{
+text-align: center;
+}
+
+.text-left{
+text-align: left;
+}
+
+.text-right{
+text-align: right;
+}
+
+@media screen and (min-width:1024px){
+.text-lg-center{
+  text-align: center;
+}
+
+.text-lg-left{
+  text-align: left;
+}
+
+.text-lg-right{
+  text-align: right;
+}
+}
+
+/************* Site Styles *************/
+.about > article{
+margin-bottom: 2rem;
+}
+
+.contact-card{
+  margin: 1rem auto;
+  padding: 1rem;
+  width: 100%;
+  height: 144px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.contact-card > svg{
+  width: 2rem;
+  height: 2rem;
+}
+
+.contact-card > small{
+  margin-top: -1rem;
+}
+
+.footer{
+  margin-bottom: var(--header-height);
+  padding: 0.05rem;
+  text-align: center;
+  color: var(--color-blanco);
+  background-color: var(--tercer-color);
+}
+
+.header{
+position: fixed;
+left: 0;
+bottom: 0;/*pone abajo el header*/
+z-index: 999;/*para que la cabecera sea lo primero que se vea*/
+padding: 1rem;
+width: 100%;
+height: var(--header-height);
+background-color: var(--segundo-color);
+}
+
+.header > .container{
+display: flex;/*flexible, que no este abajo nada sino lo pone a los lados*/
+justify-content: space-between;/*elementos flexibles entre lineas*/
+align-items: center;/*centra verticalmente*/
+}
+
+.logo a{
+color: var(--primer-color);
+font-weight: bold;/*negrita*/
+font-size: 2rem;/*tamaño de letra*/
+text-decoration: none;/*le quita el subrayado de link*/
+}
+
+.portafolio-card{
+position: relative;/*porque se podra una posicion absoluta encima*/
+width: 100%;
+margin: .5rem auto;
+display: block;
+}
+
+.portafolio-card img{
+width: 100%;
+height: 100%;
+object-fit: cover;/*para que no se pierda el aspecto de la imagen o se deforme*/
+}
+
+.portafolio-card-info{
+position: absolute;/*permite que el texto se quede*/
+top: 0;/*hace que la imagen se quede*/
+left: 0;
+width: 100%;
+height: 100%;
+padding: 1rem;
+background-color: var(--primer-color-alpha);
+color: var(--color-blanco);
+text-align: justify;
+opacity: 0;
+pointer-events: none;
+transition: all 0.5s ease-in-out;
+}
+
+.portafolio-card:hover .portafolio-card-info{
+opacity: 1;
+pointer-events: auto;
+}
+
+.portafolio-card-info > div{
+padding: 1rem;
+border: thin solid var(--color-blanco);
+width: 100%;
+height: 100%;
+}
+
+.portafolio-modal{
+  padding: 1rem;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.portafolio-modal h3{
+  border-bottom: medium solid var(--primer-color);
+  padding: .5rem 0;
+  margin: 1rem auto;
+  color: var(--color-titulo);
+}
+
+.portafolio-detalle{
+  display: grid;
+  grid-template-columns: 40% 60%;
+  grid-auto-rows: 2rem;
+}
+
+.portafolio-detalle b{
+  color: var(--primer-color);
+}
+
+.portafolio-info{
+  text-align: justify;
+}
+
+.redes-sociales a{
+  padding: 0 .5rem;
+  text-decoration: none;
+}
+
+.redes-sociales svg{
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+/*tablet*/
+@media screen and (min-width:768px){
+.contact-cards{
+  display: grid;
+  grid-template-columns: repeat(2,48%);
+  justify-content: space-between;
+}
+
+.portafolio > .container{
+  display: grid;
+  grid-template-columns: repeat(2,49%);
+  justify-content: space-between;
+}
+
+.portafolio .section-titulo{
+  grid-column: span 2;
+}
+
+.portafolio-modal{
+  max-width: 800px;
+  flex-direction: row;
+}
+
+.portafolio-info{/*para que se separe ya que estaba junto*/
+  margin-left: 1rem;
+  align-self: center;
+  text-align: justify;
+}
+
+}
+/*desktop*/
+@media screen and (min-width:1024px){
+.about{
+  display: grid;
+  grid-template-columns: repeat(3,30%);
+  justify-content: space-between;
+  align-content: center;
+}
+
+.contact-cards{
+  grid-template-columns: repeat(4,24%);
+}
+
+.footer{
+  margin-bottom: 0;
+}
+
+.header{
+  position: sticky;/*si algo hay arriba en el header, no se pone encima, sino que se adapata lo q estaba arriba se pone abajo*/
+  top: 0;/*cuando toque top se hace fijo*/
+  padding: 0.5rem;
+  height: calc(var(--header-height)- 0.5rem);
+}
+
+.portafolio > .container{
+  display: grid;
+  grid-template-columns: repeat(3,32%);
+  justify-content: space-between;
+}
+
+.portafolio .section-titulo{
+  grid-column: span 3;
+}
+
+}
